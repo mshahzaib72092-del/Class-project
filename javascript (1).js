@@ -27,7 +27,7 @@ hoverTriggers.forEach(trigger => {
 });
 
 // Typing Animation
-const texts = ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'UI/UX'];
+const texts = ['Web Design', 'Branding', 'Development', 'Digital Marketing', 'SEO'];
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
