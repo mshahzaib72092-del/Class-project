@@ -1,943 +1,1648 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Zenith Digital - Creative Digital Agency</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Tailwind Config -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: '#f97316',
-                        secondary: '#ea580c',
-                        dark: '#0a0a0a',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 6s ease-in-out 3s infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                        'slideRight': 'slideRight 0.6s ease forwards',
-                        'bounce-in': 'bounceIn 0.5s ease forwards',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px rgba(249,115,22,0.5)' },
-                            '100%': { boxShadow: '0 0 20px rgba(249,115,22,0.8), 0 0 40px rgba(249,115,22,0.4)' }
-                        },
-                        slideRight: {
-                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' }
-                        },
-                        bounceIn: {
-                            '0%': { transform: 'scale(0.3)', opacity: '0' },
-                            '50%': { transform: 'scale(1.05)' },
-                            '70%': { transform: 'scale(0.9)' },
-                            '100%': { transform: 'scale(1)', opacity: '1' }
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Outfit", "sans-serif"],
+            },
+            colors: {
+              primary: "#f97316",
+              secondary: "#ea580c",
+              dark: "#0a0a0a",
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "float-delayed": "float 6s ease-in-out 3s infinite",
+              "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              glow: "glow 2s ease-in-out infinite alternate",
+              slideRight: "slideRight 0.6s ease forwards",
+              "bounce-in": "bounceIn 0.5s ease forwards",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+                "50%": { transform: "translateY(-20px) rotate(2deg)" },
+              },
+              glow: {
+                "0%": { boxShadow: "0 0 5px rgba(249,115,22,0.5)" },
+                "100%": {
+                  boxShadow:
+                    "0 0 20px rgba(249,115,22,0.8), 0 0 40px rgba(249,115,22,0.4)",
+                },
+              },
+              slideRight: {
+                "0%": { transform: "translateX(-30px)", opacity: "0" },
+                "100%": { transform: "translateX(0)", opacity: "1" },
+              },
+              bounceIn: {
+                "0%": { transform: "scale(0.3)", opacity: "0" },
+                "50%": { transform: "scale(1.05)" },
+                "70%": { transform: "scale(0.9)" },
+                "100%": { transform: "scale(1)", opacity: "1" },
+              },
+            },
+          },
+        },
+      };
     </script>
 
     <!-- Link to external CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="gradient-bg text-white">
-
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="gradient-bg text-white">
     <!-- Custom Cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <a href="#" class="text-3xl font-bold text-gradient hover-trigger">ZD</a>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link text-gray-300 hover:text-white transition hover-trigger">Home</a>
-                    <a href="#about" class="nav-link text-gray-300 hover:text-white transition hover-trigger">About</a>
-                    <a href="#education" class="nav-link text-gray-300 hover:text-white transition hover-trigger">Our Journey</a>
-                    <a href="#skills" class="nav-link text-gray-300 hover:text-white transition hover-trigger">Services</a>
-                    <a href="#projects" class="nav-link text-gray-300 hover:text-white transition hover-trigger">Projects</a>
-                    <a href="#contact" class="nav-link text-gray-300 hover:text-white transition hover-trigger">Get in Touch</a>
-                </div>
+    <nav
+      class="fixed w-full z-50 top-0 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <a href="#" class="text-3xl font-bold text-gradient hover-trigger"
+            >ZD</a
+          >
 
-                <button class="md:hidden text-white hover-trigger" onclick="toggleMenu()">
-                    <i class="fas fa-bars w-6 h-6"></i>
-                </button>
-            </div>
-        </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#home"
+              class="nav-link text-gray-300 hover:text-white transition hover-trigger"
+              >Home</a
+            >
+            <a
+              href="#about"
+              class="nav-link text-gray-300 hover:text-white transition hover-trigger"
+              >About</a
+            >
+            <a
+              href="#education"
+              class="nav-link text-gray-300 hover:text-white transition hover-trigger"
+              >Our Journey</a
+            >
+            <a
+              href="#skills"
+              class="nav-link text-gray-300 hover:text-white transition hover-trigger"
+              >Services</a
+            >
+            <a
+              href="#projects"
+              class="nav-link text-gray-300 hover:text-white transition hover-trigger"
+              >Projects</a
+            >
+            <a
+              href="#contact"
+              class="nav-link text-gray-300 hover:text-white transition hover-trigger"
+              >Get in Touch</a
+            >
+          </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden glass-card mx-4 rounded-2xl mb-4">
-            <div class="flex flex-col p-6 space-y-4">
-                <a href="#home" class="text-gray-300 hover:text-white transition hover-trigger">Home</a>
-                <a href="#about" class="text-gray-300 hover:text-white transition hover-trigger">About</a>
-                <a href="#education" class="text-gray-300 hover:text-white transition hover-trigger">Our Journey</a>
-                <a href="#skills" class="text-gray-300 hover:text-white transition hover-trigger">Services</a>
-                <a href="#projects" class="text-gray-300 hover:text-white transition hover-trigger">Projects</a>
-                <a href="#contact" class="text-gray-300 hover:text-white transition hover-trigger">Get in Touch</a>
-            </div>
+          <button
+            class="md:hidden text-white hover-trigger"
+            onclick="toggleMenu()"
+          >
+            <i class="fas fa-bars w-6 h-6"></i>
+          </button>
         </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden glass-card mx-4 rounded-2xl mb-4"
+      >
+        <div class="flex flex-col p-6 space-y-4">
+          <a
+            href="#home"
+            class="text-gray-300 hover:text-white transition hover-trigger"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="text-gray-300 hover:text-white transition hover-trigger"
+            >About</a
+          >
+          <a
+            href="#education"
+            class="text-gray-300 hover:text-white transition hover-trigger"
+            >Our Journey</a
+          >
+          <a
+            href="#skills"
+            class="text-gray-300 hover:text-white transition hover-trigger"
+            >Services</a
+          >
+          <a
+            href="#projects"
+            class="text-gray-300 hover:text-white transition hover-trigger"
+            >Projects</a
+          >
+          <a
+            href="#contact"
+            class="text-gray-300 hover:text-white transition hover-trigger"
+            >Get in Touch</a
+          >
+        </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        </div>
+    <section
+      id="home"
+      class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
+    >
+      <!-- Background Elements -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          class="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-20 right-10 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/2 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
+        ></div>
+      </div>
 
-        <!-- Floating Particles -->
-        <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+      <!-- Floating Particles -->
+      <div id="particles" class="absolute inset-0 pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Left Content -->
-                <div class="space-y-8 scroll-reveal">
-                    <div class="space-y-4">
-                        <div class="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full">
-                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            <p class="text-gray-400 text-sm">Available for new projects</p>
-                        </div>
-                        <p class="text-gray-400 text-lg">Digital Agency</p>
-                        <h1 class="text-6xl md:text-7xl font-bold leading-tight">
-                            Zenith <span class="text-gradient">Digital</span>
-                        </h1>
-                        <div class="text-2xl md:text-3xl text-gray-300 font-light">
-                            Expert In: <span id="typing-text" class="text-gradient typing-cursor"></span>
-                        </div>
-                        <p class="text-gray-400 text-lg max-w-lg">
-                            We build elite, high-performance digital experiences with precision and confidence.
-                        </p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#projects" class="btn-primary px-8 py-4 rounded-full font-semibold text-white text-lg inline-flex items-center gap-2 hover-trigger">
-                            <i class="fas fa-briefcase"></i>
-                            View Our Work
-                        </a>
-                        <a href="#contact" class="px-8 py-4 rounded-full font-semibold text-white text-lg border-2 border-orange-500/30 hover:border-orange-500 transition inline-flex items-center gap-2 hover-trigger">
-                            <i class="fas fa-paper-plane"></i>
-                            Let's Talk
-                        </a>
-                    </div>
-
-                    <!-- Quick Stats -->
-                    <div class="grid grid-cols-3 gap-6 pt-8">
-                        <div class="glass-card rounded-2xl p-4 text-center">
-                            <p class="text-3xl font-bold text-gradient stat-counter" data-target="8">0</p>
-                            <p class="text-gray-400 text-sm mt-1">Years Experience</p>
-                        </div>
-                        <div class="glass-card rounded-2xl p-4 text-center">
-                            <p class="text-3xl font-bold text-gradient stat-counter" data-target="120">0</p>
-                            <p class="text-gray-400 text-sm mt-1">Projects Delivered</p>
-                        </div>
-                        <div class="glass-card rounded-2xl p-4 text-center">
-                            <p class="text-3xl font-bold text-gradient stat-counter" data-target="80">0</p>
-                            <p class="text-gray-400 text-sm mt-1">Happy Clients</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Content - Agency Image -->
-                <div class="character-container relative h-[600px] scroll-reveal">
-                    <!-- Lightning Bolts -->
-                    <div class="absolute top-0 right-0 w-32 h-32 lightning-bolt rounded-3xl rotate-12 animate-float opacity-80"></div>
-                    <div class="absolute bottom-20 left-0 w-24 h-24 lightning-bolt rounded-2xl -rotate-12 animate-float-delayed opacity-60"></div>
-
-                    <!-- Orbit Container -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <!-- Orbiting Tech Icons -->
-                        <div class="orbit-icon absolute">
-                            <div class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger">
-                                <i class="fab fa-html5 text-3xl" style="color: #E34F26;"></i>
-                            </div>
-                        </div>
-                        <div class="orbit-icon-delayed absolute">
-                            <div class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger">
-                                <i class="fab fa-css3-alt text-3xl" style="color: #1572B6;"></i>
-                            </div>
-                        </div>
-                        <div class="orbit-icon absolute" style="animation-delay: -5s;">
-                            <div class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger">
-                                <i class="fab fa-js text-3xl" style="color: #F7DF1E;"></i>
-                            </div>
-                        </div>
-                        <div class="orbit-icon-delayed absolute" style="animation-delay: -7.5s;">
-                            <div class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger">
-                                <i class="fab fa-git-alt text-3xl" style="color: #F05032;"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Main Agency Image -->
-                    <div class="absolute inset-0 flex items-center justify-center character-3d">
-                        <div class="relative w-80 h-96">
-                            <!-- Agency Image Container -->
-                            <div class="absolute inset-0 gradient-orange rounded-[3rem] shadow-2xl shadow-orange-500/30 overflow-hidden animate-glow">
-                                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&fit=crop" alt="Zenith Digital Agency Team" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&fit=crop'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-orange-600/80 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-6 text-center">
-                                    <p class="text-white font-bold text-2xl">ZD</p>
-                                    <p class="text-white/90 text-sm">Digital Agency</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Decorative Elements -->
-                            <div class="absolute -top-4 -right-4 w-16 h-16 bg-white/20 rounded-full blur-xl"></div>
-                            <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-orange-400/30 rounded-full blur-xl"></div>
-                        </div>
-                    </div>
-
-                    <!-- Floating Stats Cards -->
-                    <div class="absolute top-10 left-10 glass-card rounded-2xl p-4 animate-float">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-code text-orange-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-bold text-white">8+</p>
-                                <p class="text-xs text-gray-400">Years Experience</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="absolute bottom-20 right-10 glass-card rounded-2xl p-4 animate-float-delayed">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-users text-orange-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-2xl font-bold text-white">20+</p>
-                                <p class="text-xs text-gray-400">Team Members</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Left Content -->
+          <div class="space-y-8 scroll-reveal">
+            <div class="space-y-4">
+              <div
+                class="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full"
+              >
+                <span
+                  class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                ></span>
+                <p class="text-gray-400 text-sm">Available for new projects</p>
+              </div>
+              <p class="text-gray-400 text-lg">Digital Agency</p>
+              <h1 class="text-6xl md:text-7xl font-bold leading-tight">
+                Zenith <span class="text-gradient">Digital</span>
+              </h1>
+              <div class="text-2xl md:text-3xl text-gray-300 font-light">
+                Expert In:
+                <span
+                  id="typing-text"
+                  class="text-gradient typing-cursor"
+                ></span>
+              </div>
+              <p class="text-gray-400 text-lg max-w-lg">
+                We build elite, high-performance digital experiences with
+                precision and confidence.
+              </p>
             </div>
-        </div>
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-orange-400 text-2xl"></i>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#projects"
+                class="btn-primary px-8 py-4 rounded-full font-semibold text-white text-lg inline-flex items-center gap-2 hover-trigger"
+              >
+                <i class="fas fa-briefcase"></i>
+                View Our Work
+              </a>
+              <a
+                href="#contact"
+                class="px-8 py-4 rounded-full font-semibold text-white text-lg border-2 border-orange-500/30 hover:border-orange-500 transition inline-flex items-center gap-2 hover-trigger"
+              >
+                <i class="fas fa-paper-plane"></i>
+                Let's Talk
+              </a>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-6 pt-8">
+              <div class="glass-card rounded-2xl p-4 text-center">
+                <p
+                  class="text-3xl font-bold text-gradient stat-counter"
+                  data-target="8"
+                >
+                  0
+                </p>
+                <p class="text-gray-400 text-sm mt-1">Years Experience</p>
+              </div>
+              <div class="glass-card rounded-2xl p-4 text-center">
+                <p
+                  class="text-3xl font-bold text-gradient stat-counter"
+                  data-target="120"
+                >
+                  0
+                </p>
+                <p class="text-gray-400 text-sm mt-1">Projects Delivered</p>
+              </div>
+              <div class="glass-card rounded-2xl p-4 text-center">
+                <p
+                  class="text-3xl font-bold text-gradient stat-counter"
+                  data-target="80"
+                >
+                  0
+                </p>
+                <p class="text-gray-400 text-sm mt-1">Happy Clients</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Content - Agency Image -->
+          <div class="character-container relative h-[600px] scroll-reveal">
+            <!-- Lightning Bolts -->
+            <div
+              class="absolute top-0 right-0 w-32 h-32 lightning-bolt rounded-3xl rotate-12 animate-float opacity-80"
+            ></div>
+            <div
+              class="absolute bottom-20 left-0 w-24 h-24 lightning-bolt rounded-2xl -rotate-12 animate-float-delayed opacity-60"
+            ></div>
+
+            <!-- Orbit Container -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <!-- Orbiting Tech Icons -->
+              <div class="orbit-icon absolute">
+                <div
+                  class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger"
+                >
+                  <i class="fab fa-html5 text-3xl" style="color: #e34f26"></i>
+                </div>
+              </div>
+              <div class="orbit-icon-delayed absolute">
+                <div
+                  class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger"
+                >
+                  <i
+                    class="fab fa-css3-alt text-3xl"
+                    style="color: #1572b6"
+                  ></i>
+                </div>
+              </div>
+              <div class="orbit-icon absolute" style="animation-delay: -5s">
+                <div
+                  class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger"
+                >
+                  <i class="fab fa-js text-3xl" style="color: #f7df1e"></i>
+                </div>
+              </div>
+              <div
+                class="orbit-icon-delayed absolute"
+                style="animation-delay: -7.5s"
+              >
+                <div
+                  class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center border border-orange-500/30 tech-logo hover-trigger"
+                >
+                  <i class="fab fa-git-alt text-3xl" style="color: #f05032"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Agency Image -->
+            <div
+              class="absolute inset-0 flex items-center justify-center character-3d"
+            >
+              <div class="relative w-80 h-96">
+                <!-- Agency Image Container -->
+                <div
+                  class="absolute inset-0 gradient-orange rounded-[3rem] shadow-2xl shadow-orange-500/30 overflow-hidden animate-glow"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&fit=crop"
+                    alt="Zenith Digital Agency Team"
+                    class="w-full h-full object-cover"
+                    onerror="
+                      this.src =
+                        'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&fit=crop'
+                    "
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-orange-600/80 to-transparent"
+                  ></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 text-center">
+                    <p class="text-white font-bold text-2xl">ZD</p>
+                    <p class="text-white/90 text-sm">Digital Agency</p>
+                  </div>
+                </div>
+
+                <!-- Decorative Elements -->
+                <div
+                  class="absolute -top-4 -right-4 w-16 h-16 bg-white/20 rounded-full blur-xl"
+                ></div>
+                <div
+                  class="absolute -bottom-4 -left-4 w-20 h-20 bg-orange-400/30 rounded-full blur-xl"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Floating Stats Cards -->
+            <div
+              class="absolute top-10 left-10 glass-card rounded-2xl p-4 animate-float"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center"
+                >
+                  <i class="fas fa-code text-orange-400"></i>
+                </div>
+                <div>
+                  <p class="text-2xl font-bold text-white">8+</p>
+                  <p class="text-xs text-gray-400">Years Experience</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute bottom-20 right-10 glass-card rounded-2xl p-4 animate-float-delayed"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center"
+                >
+                  <i class="fas fa-users text-orange-400"></i>
+                </div>
+                <div>
+                  <p class="text-2xl font-bold text-white">20+</p>
+                  <p class="text-xs text-gray-400">Team Members</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <i class="fas fa-chevron-down text-orange-400 text-2xl"></i>
+      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-5xl font-bold mb-4">About <span class="text-gradient">Us</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Built To Engineer Powerful Solutions
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="scroll-reveal space-y-6">
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Zenith Digital is a full-service creative agency with years of hands-on experience building responsive, user-friendly, and modern digital experiences. We specialize in web design, development, branding, and digital marketing. Passionate about crafting clean UI/UX and continuously refining our craft. We partner with businesses of every size to help them learn, grow, and succeed online.
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <div class="glass-card px-6 py-3 rounded-full flex items-center gap-3">
-                            <i class="fas fa-map-marker-alt text-orange-400"></i>
-                            <span class="text-gray-300">Karachi, Pakistan</span>
-                        </div>
-                        <div class="glass-card px-6 py-3 rounded-full flex items-center gap-3">
-                            <i class="fas fa-calendar text-orange-400"></i>
-                            <span class="text-gray-300">Founded in 2018</span>
-                        </div>
-                        <div class="glass-card px-6 py-3 rounded-full flex items-center gap-3">
-                            <i class="fas fa-flag text-orange-400"></i>
-                            <span class="text-gray-300">Global Reach</span>
-                        </div>
-                        <div class="glass-card px-6 py-3 rounded-full flex items-center gap-3">
-                            <i class="fas fa-user text-orange-400"></i>
-                            <span class="text-gray-300">20+ Team Members</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <div class="glass-card px-6 py-3 rounded-full flex items-center gap-3">
-                            <i class="fas fa-language text-orange-400"></i>
-                            <span class="text-gray-300">Urdu, English</span>
-                        </div>
-                        <div class="glass-card px-6 py-3 rounded-full flex items-center gap-3">
-                            <i class="fas fa-laptop-code text-orange-400"></i>
-                            <span class="text-gray-300">Full-Service Digital Agency</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 scroll-reveal">
-                    <div class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition">
-                        <i class="fab fa-html5 text-5xl mb-3" style="color: #E34F26;"></i>
-                        <p class="font-semibold">HTML5</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition">
-                        <i class="fab fa-css3-alt text-5xl mb-3" style="color: #1572B6;"></i>
-                        <p class="font-semibold">CSS3</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition">
-                        <i class="fab fa-js text-5xl mb-3" style="color: #F7DF1E;"></i>
-                        <p class="font-semibold">JavaScript</p>
-                    </div>
-                    <div class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition">
-                        <i class="fab fa-git-alt text-5xl mb-3" style="color: #F05032;"></i>
-                        <p class="font-semibold">Git</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <!-- Services Section -->
-            <div class="grid md:grid-cols-3 gap-8 mt-16">
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fas fa-laptop-code text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Web Development</h3>
-                    <p class="text-gray-400">Building responsive, fast, and modern websites tailored to your needs.</p>
-                </div>
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fas fa-mobile-alt text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Responsive Design</h3>
-                    <p class="text-gray-400">Creating beautiful experiences that work perfectly on all devices.</p>
-                </div>
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fas fa-rocket text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">UI/UX Design</h3>
-                    <p class="text-gray-400">Designing clean and modern user interfaces for exceptional user experience.</p>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="text-5xl font-bold mb-4">
+            About <span class="text-gradient">Us</span>
+          </h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Built To Engineer Powerful Solutions
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="scroll-reveal space-y-6">
+            <p class="text-gray-300 text-lg leading-relaxed">
+              Zenith Digital is a full-service creative agency with years of
+              hands-on experience building responsive, user-friendly, and modern
+              digital experiences. We specialize in web design, development,
+              branding, and digital marketing. Passionate about crafting clean
+              UI/UX and continuously refining our craft. We partner with
+              businesses of every size to help them learn, grow, and succeed
+              online.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4">
+              <div
+                class="glass-card px-6 py-3 rounded-full flex items-center gap-3"
+              >
+                <i class="fas fa-map-marker-alt text-orange-400"></i>
+                <span class="text-gray-300">Karachi, Pakistan</span>
+              </div>
+              <div
+                class="glass-card px-6 py-3 rounded-full flex items-center gap-3"
+              >
+                <i class="fas fa-calendar text-orange-400"></i>
+                <span class="text-gray-300">Founded in 2018</span>
+              </div>
+              <div
+                class="glass-card px-6 py-3 rounded-full flex items-center gap-3"
+              >
+                <i class="fas fa-flag text-orange-400"></i>
+                <span class="text-gray-300">Global Reach</span>
+              </div>
+              <div
+                class="glass-card px-6 py-3 rounded-full flex items-center gap-3"
+              >
+                <i class="fas fa-user text-orange-400"></i>
+                <span class="text-gray-300">20+ Team Members</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-4 pt-2">
+              <div
+                class="glass-card px-6 py-3 rounded-full flex items-center gap-3"
+              >
+                <i class="fas fa-language text-orange-400"></i>
+                <span class="text-gray-300">Urdu, English</span>
+              </div>
+              <div
+                class="glass-card px-6 py-3 rounded-full flex items-center gap-3"
+              >
+                <i class="fas fa-laptop-code text-orange-400"></i>
+                <span class="text-gray-300">Full-Service Digital Agency</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 scroll-reveal">
+            <div
+              class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition"
+            >
+              <i class="fab fa-html5 text-5xl mb-3" style="color: #e34f26"></i>
+              <p class="font-semibold">HTML5</p>
+            </div>
+            <div
+              class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition"
+            >
+              <i
+                class="fab fa-css3-alt text-5xl mb-3"
+                style="color: #1572b6"
+              ></i>
+              <p class="font-semibold">CSS3</p>
+            </div>
+            <div
+              class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition"
+            >
+              <i class="fab fa-js text-5xl mb-3" style="color: #f7df1e"></i>
+              <p class="font-semibold">JavaScript</p>
+            </div>
+            <div
+              class="glass-card rounded-2xl p-6 text-center tech-logo hover-trigger hover:scale-110 transition"
+            >
+              <i
+                class="fab fa-git-alt text-5xl mb-3"
+                style="color: #f05032"
+              ></i>
+              <p class="font-semibold">Git</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Services Section -->
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div
+              class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-laptop-code text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Web Development</h3>
+            <p class="text-gray-400">
+              Building responsive, fast, and modern websites tailored to your
+              needs.
+            </p>
+          </div>
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div
+              class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-mobile-alt text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Responsive Design</h3>
+            <p class="text-gray-400">
+              Creating beautiful experiences that work perfectly on all devices.
+            </p>
+          </div>
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div
+              class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-rocket text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">UI/UX Design</h3>
+            <p class="text-gray-400">
+              Designing clean and modern user interfaces for exceptional user
+              experience.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Our Journey Section -->
     <section id="education" class="py-32 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-5xl font-bold mb-4">Our Journey</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Milestones that shaped our agency
-                </p>
-            </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"
+      ></div>
 
-            <div class="max-w-3xl mx-auto">
-                <!-- Agency Founded -->
-                <div class="timeline-item mb-8 scroll-reveal education-card">
-                    <div class="glass-card rounded-2xl p-6 ml-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 gradient-orange rounded-xl flex items-center justify-center">
-                                <i class="fas fa-flag-checkered text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Agency Founded</h3>
-                                <p class="text-orange-400">Karachi, Pakistan</p>
-                            </div>
-                        </div>
-                        <div class="space-y-2 ml-4">
-                            <p class="text-gray-400"><i class="fas fa-check-circle text-orange-400 mr-2"></i>Started as a small team of passionate designers and developers</p>
-                            <p class="text-gray-400"><i class="fas fa-calendar text-orange-400 mr-2"></i>Founded in: 2018</p>
-                            <p class="text-gray-400"><i class="fas fa-star text-orange-400 mr-2"></i>First year client satisfaction: 95%</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Growth & Expansion -->
-                <div class="timeline-item scroll-reveal education-card">
-                    <div class="glass-card rounded-2xl p-6 ml-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 gradient-orange rounded-xl flex items-center justify-center">
-                                <i class="fas fa-chart-line text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Growth & Expansion</h3>
-                                <p class="text-orange-400">Ongoing</p>
-                            </div>
-                        </div>
-                        <div class="space-y-2 ml-4">
-                            <p class="text-gray-400"><i class="fas fa-briefcase text-orange-400 mr-2"></i>Expanding into branding, digital marketing & app development</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="text-5xl font-bold mb-4">Our Journey</h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Milestones that shaped our agency
+          </p>
         </div>
+
+        <div class="max-w-3xl mx-auto">
+          <!-- Agency Founded -->
+          <div class="timeline-item mb-8 scroll-reveal education-card">
+            <div class="glass-card rounded-2xl p-6 ml-6">
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-12 h-12 gradient-orange rounded-xl flex items-center justify-center"
+                >
+                  <i class="fas fa-flag-checkered text-white text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold">Agency Founded</h3>
+                  <p class="text-orange-400">Karachi, Pakistan</p>
+                </div>
+              </div>
+              <div class="space-y-2 ml-4">
+                <p class="text-gray-400">
+                  <i class="fas fa-check-circle text-orange-400 mr-2"></i
+                  >Started as a small team of passionate designers and
+                  developers
+                </p>
+                <p class="text-gray-400">
+                  <i class="fas fa-calendar text-orange-400 mr-2"></i>Founded
+                  in: 2018
+                </p>
+                <p class="text-gray-400">
+                  <i class="fas fa-star text-orange-400 mr-2"></i>First year
+                  client satisfaction: 95%
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Growth & Expansion -->
+          <div class="timeline-item scroll-reveal education-card">
+            <div class="glass-card rounded-2xl p-6 ml-6">
+              <div class="flex items-center gap-3 mb-3">
+                <div
+                  class="w-12 h-12 gradient-orange rounded-xl flex items-center justify-center"
+                >
+                  <i class="fas fa-chart-line text-white text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold">Growth & Expansion</h3>
+                  <p class="text-orange-400">Ongoing</p>
+                </div>
+              </div>
+              <div class="space-y-2 ml-4">
+                <p class="text-gray-400">
+                  <i class="fas fa-briefcase text-orange-400 mr-2"></i>Expanding
+                  into branding, digital marketing & app development
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills" class="py-32 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-5xl font-bold mb-4">Our <span class="text-gradient">Services</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Technical proficiency and capabilities
-                </p>
-            </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"
+      ></div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Web Development -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 95%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-code text-3xl" style="color: #E34F26;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Web Development</h3>
-                                <p class="skill-brief">Custom Websites & Apps</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="95">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 95%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- UI/UX Design -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 92%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-pen-nib text-3xl" style="color: #1572B6;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">UI/UX Design</h3>
-                                <p class="skill-brief">Modern Interfaces</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="92">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 92%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Branding -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 90%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-palette text-3xl" style="color: #F7DF1E;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Branding & Identity</h3>
-                                <p class="skill-brief">Logos & Brand Systems</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="90">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 90%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Digital Marketing -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 88%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-bullhorn text-3xl" style="color: #34D399;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Digital Marketing</h3>
-                                <p class="skill-brief">Campaigns That Convert</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="88">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 88%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SEO Optimization -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 85%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-magnifying-glass-chart text-3xl" style="color: #A78BFA;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">SEO Optimization</h3>
-                                <p class="skill-brief">Higher Search Rankings</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="85">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Social Media Marketing -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 90%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-share-nodes text-3xl" style="color: #60A5FA;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Social Media Marketing</h3>
-                                <p class="skill-brief">Community & Engagement</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="90">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 90%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- E-Commerce Solutions -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 87%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-cart-shopping text-3xl" style="color: #F472B6;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">E-Commerce Solutions</h3>
-                                <p class="skill-brief">Online Stores That Sell</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="87">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 87%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- App Development -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 82%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-mobile-screen-button text-3xl" style="color: #FBBF24;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">App Development</h3>
-                                <p class="skill-brief">iOS & Android Apps</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="82">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 82%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Content Strategy -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 84%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-pen text-3xl" style="color: #C084FC;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Content Strategy</h3>
-                                <p class="skill-brief">Storytelling That Sticks</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="84">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 84%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Motion Graphics & Video -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 80%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-video text-3xl" style="color: #34D399;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Motion Graphics & Video</h3>
-                                <p class="skill-brief">Video & Animation</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="80">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 80%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Management -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 88%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-list-check text-3xl" style="color: #F05032;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Project Management</h3>
-                                <p class="skill-brief">On Time, On Budget</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="88">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 88%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Client Support -->
-                <div class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger" style="--skill-percent: 93%">
-                    <div class="skill-glow"></div>
-                    <div class="skill-card-inner relative z-10">
-                        <div class="flex items-center gap-4 mb-6 skill-item-3d">
-                            <div class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center">
-                                <i class="brand-icon fas fa-headset text-3xl" style="color: #C9D1D9;"></i>
-                            </div>
-                            <div>
-                                <h3 class="skill-name text-2xl font-bold">Client Support</h3>
-                                <p class="skill-brief">Always Here For You</p>
-                                <p class="skill-percent-text text-orange-400 font-semibold" data-target="93">0%</p>
-                            </div>
-                        </div>
-                        <div class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d">
-                            <div class="skill-bar-fill h-full gradient-orange rounded-full" style="--skill-percent: 93%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Technical Skills Tags -->
-            <div class="mt-16 scroll-reveal">
-                <h3 class="text-2xl font-bold mb-6 text-center">What We Offer</h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Web Development</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">UI/UX Design</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Branding</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Digital Marketing</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">SEO</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Social Media Marketing</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">E-Commerce Solutions</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">App Development</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Content Strategy</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Motion Graphics</span>
-                    <span class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger">Project Management</span>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="text-5xl font-bold mb-4">
+            Our <span class="text-gradient">Services</span>
+          </h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Technical proficiency and capabilities
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Web Development -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 95%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-code text-3xl"
+                    style="color: #e34f26"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">Web Development</h3>
+                  <p class="skill-brief">Custom Websites & Apps</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="95"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 95%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UI/UX Design -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 92%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-pen-nib text-3xl"
+                    style="color: #1572b6"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">UI/UX Design</h3>
+                  <p class="skill-brief">Modern Interfaces</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="92"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 92%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branding -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 90%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-palette text-3xl"
+                    style="color: #f7df1e"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    Branding & Identity
+                  </h3>
+                  <p class="skill-brief">Logos & Brand Systems</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="90"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 90%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Digital Marketing -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 88%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-bullhorn text-3xl"
+                    style="color: #34d399"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    Digital Marketing
+                  </h3>
+                  <p class="skill-brief">Campaigns That Convert</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="88"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 88%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO Optimization -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 85%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-magnifying-glass-chart text-3xl"
+                    style="color: #a78bfa"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    SEO Optimization
+                  </h3>
+                  <p class="skill-brief">Higher Search Rankings</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="85"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 85%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Media Marketing -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 90%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-share-nodes text-3xl"
+                    style="color: #60a5fa"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    Social Media Marketing
+                  </h3>
+                  <p class="skill-brief">Community & Engagement</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="90"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 90%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- E-Commerce Solutions -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 87%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-cart-shopping text-3xl"
+                    style="color: #f472b6"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    E-Commerce Solutions
+                  </h3>
+                  <p class="skill-brief">Online Stores That Sell</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="87"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 87%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Development -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 82%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-mobile-screen-button text-3xl"
+                    style="color: #fbbf24"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">App Development</h3>
+                  <p class="skill-brief">iOS & Android Apps</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="82"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 82%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Strategy -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 84%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-pen text-3xl"
+                    style="color: #c084fc"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    Content Strategy
+                  </h3>
+                  <p class="skill-brief">Storytelling That Sticks</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="84"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 84%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Motion Graphics & Video -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 80%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-video text-3xl"
+                    style="color: #34d399"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    Motion Graphics & Video
+                  </h3>
+                  <p class="skill-brief">Video & Animation</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="80"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 80%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Management -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 88%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-list-check text-3xl"
+                    style="color: #f05032"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">
+                    Project Management
+                  </h3>
+                  <p class="skill-brief">On Time, On Budget</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="88"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 88%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Support -->
+          <div
+            class="skill-card glass-card rounded-3xl p-8 scroll-reveal relative overflow-hidden hover-trigger"
+            style="--skill-percent: 93%"
+          >
+            <div class="skill-glow"></div>
+            <div class="skill-card-inner relative z-10">
+              <div class="flex items-center gap-4 mb-6 skill-item-3d">
+                <div
+                  class="skill-icon-wrapper w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center"
+                >
+                  <i
+                    class="brand-icon fas fa-headset text-3xl"
+                    style="color: #c9d1d9"
+                  ></i>
+                </div>
+                <div>
+                  <h3 class="skill-name text-2xl font-bold">Client Support</h3>
+                  <p class="skill-brief">Always Here For You</p>
+                  <p
+                    class="skill-percent-text text-orange-400 font-semibold"
+                    data-target="93"
+                  >
+                    0%
+                  </p>
+                </div>
+              </div>
+              <div
+                class="h-3 bg-white/10 rounded-full overflow-hidden skill-bar-container skill-item-3d"
+              >
+                <div
+                  class="skill-bar-fill h-full gradient-orange rounded-full"
+                  style="--skill-percent: 93%"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Skills Tags -->
+        <div class="mt-16 scroll-reveal">
+          <h3 class="text-2xl font-bold mb-6 text-center">What We Offer</h3>
+          <div class="flex flex-wrap justify-center gap-4">
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Web Development</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >UI/UX Design</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Branding</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Digital Marketing</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >SEO</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Social Media Marketing</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >E-Commerce Solutions</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >App Development</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Content Strategy</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Motion Graphics</span
+            >
+            <span
+              class="skill-tag px-6 py-3 rounded-full text-orange-400 font-medium hover-trigger"
+              >Project Management</span
+            >
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-5xl font-bold mb-4">Projects</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Selected Work
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Project 1 -->
-                <div class="project-card glass-card rounded-3xl overflow-hidden scroll-reveal group hover-trigger">
-                    <div class="h-48 gradient-orange flex items-center justify-center relative overflow-hidden">
-                        <i class="fas fa-globe text-7xl text-white/80 group-hover:scale-110 transition"></i>
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <a href="#" target="_blank" class="btn-primary px-6 py-3 rounded-full font-semibold text-white hover-trigger">
-                                View Live <i class="fas fa-external-link-alt ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">Corporate Website Redesign</h3>
-                        <p class="text-gray-400 mb-4">A full brand and website redesign to showcase our client's services, portfolio, and story. Designed with a modern and responsive UI.</p>
-                        
-                        <div class="mb-4">
-                            <h4 class="text-orange-400 font-semibold mb-2">Key Features:</h4>
-                            <ul class="text-gray-400 text-sm space-y-1">
-                                <li><i class="fas fa-check text-orange-400 mr-2"></i>Responsive design for all devices</li>
-                                <li><i class="fas fa-check text-orange-400 mr-2"></i>Smooth scrolling and animations</li>
-                                <li><i class="fas fa-check text-orange-400 mr-2"></i>About, services, portfolio and contact sections</li>
-                                <li><i class="fas fa-check text-orange-400 mr-2"></i>Clean and modern user interface</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Strategy</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Design</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Development</span>
-                        </div>
-                        <a href="#" target="_blank" class="btn-primary px-6 py-3 rounded-full font-semibold text-white inline-flex items-center gap-2 hover-trigger">
-                            View Project
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card glass-card rounded-3xl overflow-hidden scroll-reveal group hover-trigger">
-                    <div class="h-48 gradient-orange flex items-center justify-center relative overflow-hidden">
-                        <i class="fas fa-shopping-cart text-7xl text-white/80 group-hover:scale-110 transition"></i>
-                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                            <button class="btn-primary px-6 py-3 rounded-full font-semibold text-white hover-trigger">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3">E-Commerce Platform Launch</h3>
-                        <p class="text-gray-400 mb-4">A fully responsive e-commerce platform built end-to-end with all essential sections and functionality.</p>
-                        
-                        <div class="mb-4">
-                            <h4 class="text-orange-400 font-semibold mb-2">Key Features:</h4>
-                            <div class="grid grid-cols-2 gap-2">
-                                <ul class="text-gray-400 text-sm space-y-1">
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Responsive Navbar</li>
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Hero Banner</li>
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Product Cards</li>
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Category Section</li>
-                                </ul>
-                                <ul class="text-gray-400 text-sm space-y-1">
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Search Bar</li>
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Add to Cart UI</li>
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Footer</li>
-                                    <li><i class="fas fa-check text-orange-400 mr-2"></i>Fully Responsive Layout</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Strategy</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Design</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm">Development</span>
-                        </div>
-                        <button class="btn-primary px-6 py-3 rounded-full font-semibold text-white inline-flex items-center gap-2 hover-trigger">
-                            View Project
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="text-5xl font-bold mb-4">Projects</h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">Selected Work</p>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- Project 1 -->
+          <div
+            class="project-card glass-card rounded-3xl overflow-hidden scroll-reveal group hover-trigger"
+          >
+            <div
+              class="h-48 gradient-orange flex items-center justify-center relative overflow-hidden"
+            >
+              <i
+                class="fas fa-globe text-7xl text-white/80 group-hover:scale-110 transition"
+              ></i>
+              <div
+                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+              >
+                <a
+                  href="#"
+                  target="_blank"
+                  class="btn-primary px-6 py-3 rounded-full font-semibold text-white hover-trigger"
+                >
+                  View Live <i class="fas fa-external-link-alt ml-2"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Corporate Website Redesign
+              </h3>
+              <p class="text-gray-400 mb-4">
+                A full brand and website redesign to showcase our client's
+                services, portfolio, and story. Designed with a modern and
+                responsive UI.
+              </p>
+
+              <div class="mb-4">
+                <h4 class="text-orange-400 font-semibold mb-2">
+                  Key Features:
+                </h4>
+                <ul class="text-gray-400 text-sm space-y-1">
+                  <li>
+                    <i class="fas fa-check text-orange-400 mr-2"></i>Responsive
+                    design for all devices
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-orange-400 mr-2"></i>Smooth
+                    scrolling and animations
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-orange-400 mr-2"></i>About,
+                    services, portfolio and contact sections
+                  </li>
+                  <li>
+                    <i class="fas fa-check text-orange-400 mr-2"></i>Clean and
+                    modern user interface
+                  </li>
+                </ul>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span
+                  class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                  >Strategy</span
+                >
+                <span
+                  class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                  >Design</span
+                >
+                <span
+                  class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                  >Development</span
+                >
+              </div>
+              <a
+                href="#"
+                target="_blank"
+                class="btn-primary px-6 py-3 rounded-full font-semibold text-white inline-flex items-center gap-2 hover-trigger"
+              >
+                View Project
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div
+            class="project-card glass-card rounded-3xl overflow-hidden scroll-reveal group hover-trigger"
+          >
+            <div
+              class="h-48 gradient-orange flex items-center justify-center relative overflow-hidden"
+            >
+              <i
+                class="fas fa-shopping-cart text-7xl text-white/80 group-hover:scale-110 transition"
+              ></i>
+              <div
+                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+              >
+                <button
+                  class="btn-primary px-6 py-3 rounded-full font-semibold text-white hover-trigger"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                E-Commerce Platform Launch
+              </h3>
+              <p class="text-gray-400 mb-4">
+                A fully responsive e-commerce platform built end-to-end with all
+                essential sections and functionality.
+              </p>
+
+              <div class="mb-4">
+                <h4 class="text-orange-400 font-semibold mb-2">
+                  Key Features:
+                </h4>
+                <div class="grid grid-cols-2 gap-2">
+                  <ul class="text-gray-400 text-sm space-y-1">
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i
+                      >Responsive Navbar
+                    </li>
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Hero
+                      Banner
+                    </li>
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Product
+                      Cards
+                    </li>
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Category
+                      Section
+                    </li>
+                  </ul>
+                  <ul class="text-gray-400 text-sm space-y-1">
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Search
+                      Bar
+                    </li>
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Add to
+                      Cart UI
+                    </li>
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Footer
+                    </li>
+                    <li>
+                      <i class="fas fa-check text-orange-400 mr-2"></i>Fully
+                      Responsive Layout
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span
+                  class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                  >Strategy</span
+                >
+                <span
+                  class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                  >Design</span
+                >
+                <span
+                  class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                  >Development</span
+                >
+              </div>
+              <button
+                class="btn-primary px-6 py-3 rounded-full font-semibold text-white inline-flex items-center gap-2 hover-trigger"
+              >
+                View Project
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Why Choose Us Section -->
     <section class="py-32 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-5xl font-bold mb-4">Why <span class="text-gradient">Choose Us</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Our approach and how we work with clients
-                </p>
-            </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"
+      ></div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Our Approach -->
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-book-open text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Our Approach</h3>
-                    </div>
-                    <p class="text-gray-400 mb-4">We continuously invest in research and emerging trends through:</p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm">Market Research</span>
-                        <span class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm">Trend Analysis</span>
-                        <span class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm">Client Feedback</span>
-                    </div>
-                </div>
-
-                <!-- Case Study Highlight -->
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-briefcase text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Case Study Highlight</h3>
-                    </div>
-                    <p class="text-gray-400 mb-4">Delivered a complete rebrand and website for a growing retail client</p>
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-check-circle text-green-500"></i>
-                        <span class="text-gray-300">Project Completed</span>
-                    </div>
-                </div>
-
-                <!-- Tools & Technology -->
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-tools text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Tools & Technology</h3>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-code text-orange-400 text-xl"></i>
-                            <span class="text-gray-300 font-semibold">Figma & VS Code</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Client Portal -->
-                <div class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-globe text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Client Portal</h3>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <i class="fas fa-info-circle text-orange-400"></i>
-                        <span class="text-gray-300">Dedicated Client Dashboard (Coming Soon)</span>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="text-5xl font-bold mb-4">
+            Why <span class="text-gradient">Choose Us</span>
+          </h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Our approach and how we work with clients
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- Our Approach -->
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center"
+              >
+                <i class="fas fa-book-open text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Our Approach</h3>
+            </div>
+            <p class="text-gray-400 mb-4">
+              We continuously invest in research and emerging trends through:
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <span
+                class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                >Market Research</span
+              >
+              <span
+                class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                >Trend Analysis</span
+              >
+              <span
+                class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-full text-sm"
+                >Client Feedback</span
+              >
+            </div>
+          </div>
+
+          <!-- Case Study Highlight -->
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center"
+              >
+                <i class="fas fa-briefcase text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Case Study Highlight</h3>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Delivered a complete rebrand and website for a growing retail
+              client
+            </p>
+            <div class="flex items-center gap-3">
+              <i class="fas fa-check-circle text-green-500"></i>
+              <span class="text-gray-300">Project Completed</span>
+            </div>
+          </div>
+
+          <!-- Tools & Technology -->
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center"
+              >
+                <i class="fas fa-tools text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Tools & Technology</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-code text-orange-400 text-xl"></i>
+                <span class="text-gray-300 font-semibold">Figma & VS Code</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Portal -->
+          <div
+            class="glass-card rounded-3xl p-8 scroll-reveal hover:border-orange-500/50 transition hover-trigger"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 gradient-orange rounded-2xl flex items-center justify-center"
+              >
+                <i class="fas fa-globe text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold">Client Portal</h3>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fas fa-info-circle text-orange-400"></i>
+              <span class="text-gray-300"
+                >Dedicated Client Dashboard (Coming Soon)</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-32 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"></div>
-        
-        <div class="max-w-4xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 scroll-reveal">
-                <h2 class="text-5xl font-bold mb-4">Get in Touch</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Let's Build Something Exceptional
-                </p>
-                <p class="text-orange-400 text-xl mt-4 font-semibold">
-                    <i class="fas fa-phone mr-2"></i>
-                    Contact: +92 300 1234567
-                </p>
-                <p class="text-gray-400 mt-2">
-                    <i class="fas fa-envelope mr-2"></i>
-                    hello@zenithdigital.com
-                </p>
-            </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/5 to-transparent"
+      ></div>
 
-            <!-- 3D Form Container -->
-            <div class="form-container-3d relative scroll-reveal hover-trigger">
-                <div class="form-glow"></div>
-                
-                <div class="form-card-3d glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                    <!-- Decorative gradient -->
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                    
-                    <form class="space-y-6 relative z-10" onsubmit="handleSubmit(event)">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="relative">
-                                <label class="block text-gray-400 mb-2 text-sm font-medium">Name</label>
-                                <div class="relative">
-                                    <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                                    <input type="text" class="form-input-3d w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none text-white placeholder-gray-500" placeholder="Your name" required>
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <label class="block text-gray-400 mb-2 text-sm font-medium">Email</label>
-                                <div class="relative">
-                                    <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                                    <input type="email" class="form-input-3d w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none text-white placeholder-gray-500" placeholder="you@example.com" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <label class="block text-gray-400 mb-2 text-sm font-medium">Message</label>
-                            <div class="relative">
-                                <i class="fas fa-comment absolute left-4 top-4 text-gray-500"></i>
-                                <textarea rows="5" class="form-input-3d w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none text-white placeholder-gray-500 resize-none" placeholder="Tell us about your project" required></textarea>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-primary w-full py-4 rounded-xl font-semibold text-white text-lg flex items-center justify-center gap-2 relative overflow-hidden group hover-trigger">
-                            <span class="relative z-10 flex items-center gap-2">
-                                <i class="fas fa-paper-plane"></i>
-                                Send Message
-                            </span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Links Section -->
-            <div class="mt-16 text-center scroll-reveal">
-                <h3 class="text-2xl font-bold mb-6">Find Us Online</h3>
-                <div class="flex justify-center gap-6">
-                    <a href="#" target="_blank" class="glass-card w-16 h-16 rounded-2xl flex items-center justify-center hover:border-orange-500 transition group hover-trigger">
-                        <i class="fas fa-globe text-2xl text-gray-400 group-hover:text-orange-400"></i>
-                    </a>
-                    <a href="#" target="_blank" class="glass-card w-16 h-16 rounded-2xl flex items-center justify-center hover:border-orange-500 transition group hover-trigger">
-                        <i class="fab fa-instagram text-2xl text-gray-400 group-hover:text-orange-400"></i>
-                    </a>
-                    <a href="#" target="_blank" class="glass-card w-16 h-16 rounded-2xl flex items-center justify-center hover:border-orange-500 transition group hover-trigger">
-                        <i class="fab fa-linkedin-in text-2xl text-gray-400 group-hover:text-orange-400"></i>
-                    </a>
-                </div>
-            </div>
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="text-5xl font-bold mb-4">Get in Touch</h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Let's Build Something Exceptional
+          </p>
+          <p class="text-orange-400 text-xl mt-4 font-semibold">
+            <i class="fas fa-phone mr-2"></i>
+            Contact: +92 300 1234567
+          </p>
+          <p class="text-gray-400 mt-2">
+            <i class="fas fa-envelope mr-2"></i>
+            hello@zenithdigital.com
+          </p>
         </div>
+
+        <!-- 3D Form Container -->
+        <div class="form-container-3d relative scroll-reveal hover-trigger">
+          <div class="form-glow"></div>
+
+          <div
+            class="form-card-3d glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden"
+          >
+            <!-- Decorative gradient -->
+            <div
+              class="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+            ></div>
+
+            <form
+              class="space-y-6 relative z-10"
+              onsubmit="handleSubmit(event)"
+            >
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="relative">
+                  <label class="block text-gray-400 mb-2 text-sm font-medium"
+                    >Name</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+                    ></i>
+                    <input
+                      type="text"
+                      class="form-input-3d w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none text-white placeholder-gray-500"
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="relative">
+                  <label class="block text-gray-400 mb-2 text-sm font-medium"
+                    >Email</label
+                  >
+                  <div class="relative">
+                    <i
+                      class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+                    ></i>
+                    <input
+                      type="email"
+                      class="form-input-3d w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none text-white placeholder-gray-500"
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="relative">
+                <label class="block text-gray-400 mb-2 text-sm font-medium"
+                  >Message</label
+                >
+                <div class="relative">
+                  <i
+                    class="fas fa-comment absolute left-4 top-4 text-gray-500"
+                  ></i>
+                  <textarea
+                    rows="5"
+                    class="form-input-3d w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl focus:outline-none text-white placeholder-gray-500 resize-none"
+                    placeholder="Tell us about your project"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn-primary w-full py-4 rounded-xl font-semibold text-white text-lg flex items-center justify-center gap-2 relative overflow-hidden group hover-trigger"
+              >
+                <span class="relative z-10 flex items-center gap-2">
+                  <i class="fas fa-paper-plane"></i>
+                  Send Message
+                </span>
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                ></div>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="mt-16 text-center scroll-reveal">
+          <h3 class="text-2xl font-bold mb-6">Find Us Online</h3>
+          <div class="flex justify-center gap-6">
+            <a
+              href="#"
+              target="_blank"
+              class="glass-card w-16 h-16 rounded-2xl flex items-center justify-center hover:border-orange-500 transition group hover-trigger"
+            >
+              <i
+                class="fas fa-globe text-2xl text-gray-400 group-hover:text-orange-400"
+              ></i>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              class="glass-card w-16 h-16 rounded-2xl flex items-center justify-center hover:border-orange-500 transition group hover-trigger"
+            >
+              <i
+                class="fab fa-instagram text-2xl text-gray-400 group-hover:text-orange-400"
+              ></i>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              class="glass-card w-16 h-16 rounded-2xl flex items-center justify-center hover:border-orange-500 transition group hover-trigger"
+            >
+              <i
+                class="fab fa-linkedin-in text-2xl text-gray-400 group-hover:text-orange-400"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-8 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p class="text-gray-400 text-sm">© 2026 Zenith Digital Agency. All rights reserved.</p>
-            <div class="flex items-center gap-6">
-                <a href="#" target="_blank" class="w-10 h-10 glass-card rounded-full flex items-center justify-center hover:border-orange-500 transition group hover-trigger">
-                    <i class="fab fa-github text-xl text-gray-400 group-hover:text-orange-400"></i>
-                </a>
-                <a href="#" target="_blank" class="w-10 h-10 glass-card rounded-full flex items-center justify-center hover:border-orange-500 transition group hover-trigger">
-                    <i class="fab fa-instagram text-xl text-gray-400 group-hover:text-orange-400"></i>
-                </a>
-                <a href="#" target="_blank" class="w-10 h-10 glass-card rounded-full flex items-center justify-center hover:border-orange-500 transition group hover-trigger">
-                    <i class="fab fa-linkedin-in text-xl text-gray-400 group-hover:text-orange-400"></i>
-                </a>
-            </div>
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <p class="text-gray-400 text-sm">
+          © 2026 Zenith Digital Agency. All rights reserved.
+        </p>
+        <div class="flex items-center gap-6">
+          <a
+            href="#"
+            target="_blank"
+            class="w-10 h-10 glass-card rounded-full flex items-center justify-center hover:border-orange-500 transition group hover-trigger"
+          >
+            <i
+              class="fab fa-github text-xl text-gray-400 group-hover:text-orange-400"
+            ></i>
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            class="w-10 h-10 glass-card rounded-full flex items-center justify-center hover:border-orange-500 transition group hover-trigger"
+          >
+            <i
+              class="fab fa-instagram text-xl text-gray-400 group-hover:text-orange-400"
+            ></i>
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            class="w-10 h-10 glass-card rounded-full flex items-center justify-center hover:border-orange-500 transition group hover-trigger"
+          >
+            <i
+              class="fab fa-linkedin-in text-xl text-gray-400 group-hover:text-orange-400"
+            ></i>
+          </a>
         </div>
+      </div>
     </footer>
 
     <!-- Link to external JavaScript -->
-    <script src="script.js"></script>
-</body>
+    <script src="javascript (1).js"></script>
+  </body>
 </html>
