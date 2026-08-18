@@ -1,8 +1,8 @@
-# Personal Portfolio Website
+# Zenith Digital - Agency Website
 
 ## Project Title
 
-**Personal Portfolio Website**
+**Zenith Digital Agency Website**
 
 > Website Link : https://class-project-gamma-one.vercel.app/
 
@@ -13,16 +13,16 @@
 
 ## Problem Statement
 
-Creating a professional online presence is important for showcasing skills, projects, education, and contact information. This portfolio website provides a simple and modern platform to introduce myself and display my web development skills and projects.
+Creating a professional online presence is important for any digital agency to showcase its services, projects, expertise, and contact information. This website provides a simple and modern platform to introduce the agency and display its web development, design, and marketing capabilities.
 
 ## Features
 
 * Modern and professional design
 * Responsive layout for mobile, tablet, and desktop
-* About Me section
-* Skills section
+* About Us section
+* Services section
 * Projects section
-* Education section
+* Our Journey (company milestones) section
 * Contact section
 * Smooth navigation
 * Interactive buttons and links
@@ -46,7 +46,7 @@ Open the project folder in Visual Studio Code or any code editor.
 
 ### 3. Run the Website
 
-Open the `index.html` file in a web browser to view the portfolio website.
+Open the `index.html` file in a web browser to view the agency website.
 
 ### 4. Deploy on GitHub Pages
 
@@ -55,12 +55,12 @@ Open the `index.html` file in a web browser to view the portfolio website.
 3. Select **Pages**.
 4. Select the `main` branch.
 5. Click **Save**.
-6. GitHub will generate a live link for the portfolio website.
+6. GitHub will generate a live link for the agency website.
 
 ## Project Structure
 
 ```text
-Personal-Portfolio/
+Zenith-Digital-Agency/
 │
 ├── index.html
 ├── style.css
@@ -71,4 +71,4 @@ Personal-Portfolio/
 
 ## Conclusion
 
-This personal portfolio website showcases my skills, projects, education, and web development abilities through a modern and responsive design.
+This agency website showcases Zenith Digital's services, projects, milestones, and web development capabilities through a modern and responsive design.
